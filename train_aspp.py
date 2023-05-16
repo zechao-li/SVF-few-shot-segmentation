@@ -153,7 +153,7 @@ def main():
         transform.Normalize(mean=mean, std=std)])
     if args.data_set == 'pascal' or args.data_set == 'coco':
         train_data = dataset.SemData(split=args.split, shot=args.shot, data_root=args.data_root, base_data_root=args.base_data_root, data_list=args.train_list, \
-                                    transform=train_transform, transform_tri=train_transform_tri, mode='train', \
+                                    transform=train_transform, mode='train', \
                                     data_set=args.data_set, use_split_coco=args.use_split_coco)
     train_sampler = DistributedSampler(train_data) if args.distributed else None
     train_loader = torch.utils.data.DataLoader(train_data, batch_size=args.batch_size, num_workers=args.workers, \
@@ -173,7 +173,7 @@ def main():
                 transform.Normalize(mean=mean, std=std)])
         if args.data_set == 'pascal' or args.data_set == 'coco':
             val_data = dataset.SemData(split=args.split, shot=args.shot, data_root=args.data_root, base_data_root=args.base_data_root, data_list=args.val_list, \
-                                    transform=val_transform, transform_tri=val_transform_tri, mode='val', \
+                                    transform=val_transform, mode='val', \
                                     data_set=args.data_set, use_split_coco=args.use_split_coco)                                   
         val_loader = torch.utils.data.DataLoader(val_data, batch_size=args.batch_size_val, shuffle=False, num_workers=args.workers, pin_memory=False, sampler=None)
 
